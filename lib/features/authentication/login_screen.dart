@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScren extends StatelessWidget {
   const LoginScren({super.key});
@@ -35,6 +37,20 @@ class LoginScren extends StatelessWidget {
                   color: Colors.black45,
                 ),
                 textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              AuthButton(
+                text: 'Use email & password',
+                icon: FaIcon(FontAwesomeIcons.user),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              AuthButton(
+                text: 'Continue with Apple',
+                icon: FaIcon(FontAwesomeIcons.apple),
               ),
             ],
           ),

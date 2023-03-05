@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -44,7 +46,18 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 40,
-              )
+              ),
+              AuthButton(
+                text: 'Use email & password',
+                icon: FaIcon(FontAwesomeIcons.user),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              AuthButton(
+                text: 'Continue with Apple',
+                icon: FaIcon(FontAwesomeIcons.apple),
+              ),
             ],
           ),
         ),
