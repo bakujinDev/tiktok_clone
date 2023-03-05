@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/features/authentication/login_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class LoginScren extends StatelessWidget {
+  const LoginScren({super.key});
 
-  void onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScren(),
-      ),
-    );
+  void onSignUpTap(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -19,13 +14,12 @@ class SignUpScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: const [
               SizedBox(
                 height: 80,
               ),
               Text(
-                "Sign up for TikTok",
+                'Log in to TikTok',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -35,39 +29,36 @@ class SignUpScreen extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Create a profile, follow other accounts, make your own videos and more.',
+                'Manage your account, check notifications, comment on videos and more.',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black45,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: 40,
-              )
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey.shade100,
-        elevation: 2,
+        // elevation: 2,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 32),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Already have an account?',
+                "Don't have an account?",
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(
                 width: 5,
               ),
               GestureDetector(
-                onTap: (() => onLoginTap(context)),
+                onTap: () => onSignUpTap(context),
                 child: Text(
-                  "Log in",
+                  'Sign up',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
