@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
+  void _onLoginTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginScren(),
       ),
     );
+  }
+
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const UsernameScreen()));
   }
 
   @override
@@ -22,21 +28,21 @@ class SignUpScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: 80,
               ),
-              Text(
+              const Text(
                 "Sign up for TikTok",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Create a profile, follow other accounts, make your own videos and more.',
                 style: TextStyle(
                   fontSize: 16,
@@ -44,17 +50,20 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              AuthButton(
-                text: 'Use email & password',
-                icon: FaIcon(FontAwesomeIcons.user),
+              GestureDetector(
+                onTap: () => _onEmailTap(context),
+                child: const AuthButton(
+                  icon: FaIcon(FontAwesomeIcons.user),
+                  text: "Use email & password",
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              AuthButton(
+              const AuthButton(
                 text: 'Continue with Apple',
                 icon: FaIcon(FontAwesomeIcons.apple),
               ),
@@ -63,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 32),
@@ -78,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
                 width: 5,
               ),
               GestureDetector(
-                onTap: (() => onLoginTap(context)),
+                onTap: (() => _onLoginTap(context)),
                 child: Text(
                   "Log in",
                   style: TextStyle(
