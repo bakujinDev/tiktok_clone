@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class EmailScreen extends StatefulWidget {
+  const EmailScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<EmailScreen> createState() => _EmailScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
+class _EmailScreenState extends State<EmailScreen> {
   final TextEditingController _usernameController = TextEditingController();
 
   String _username = '';
@@ -17,7 +15,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
   @override
   void initState() {
     super.initState();
-
     _usernameController.addListener(() {
       setState(() {
         _username = _usernameController.text;
@@ -29,13 +26,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
   void dispose() {
     _usernameController.dispose();
     super.dispose();
-  }
-
-  void _onNextTap() {
-    if (_username.isEmpty) return;
-
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const EmailScreen()));
   }
 
   @override
@@ -53,20 +43,10 @@ class _UsernameScreenState extends State<UsernameScreen> {
               height: 40,
             ),
             const Text(
-              "Create username",
+              'What is your email?',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const Text(
-              'You can always this later.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
               ),
             ),
             const SizedBox(
@@ -75,9 +55,11 @@ class _UsernameScreenState extends State<UsernameScreen> {
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
-                hintText: "Username",
+                hintText: "Email",
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade400),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade400,
+                  ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -89,10 +71,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
             ),
             const SizedBox(
               height: 28,
-            ),
-            GestureDetector(
-              onTap: _onNextTap,
-              child: FormButton(disabled: _username.isEmpty),
             ),
           ],
         ),
