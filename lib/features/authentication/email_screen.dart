@@ -1,47 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/password_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class EmailScreen extends StatefulWidget {
+  const EmailScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<EmailScreen> createState() => _EmailScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+class _EmailScreenState extends State<EmailScreen> {
+  final TextEditingController _emailController = TextEditingController();
 
-  String _username = '';
+  String _email = '';
 
   @override
   void initState() {
     super.initState();
-
-    _usernameController.addListener(() {
+    _emailController.addListener(() {
       setState(() {
-        _username = _usernameController.text;
+        _email = _emailController.text;
       });
     });
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     super.dispose();
+  }
+
+  String? _isEmailValid() {
+    if (_email.isEmpty) return null;
+
+    final regExp = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (!regExp.hasMatch(_email)) {
+      return 'Email not valid';
+    }
+
+    return null;
   }
 
   void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
   }
 
-  void _onNextTap() {
-    if (_username.isEmpty) return;
+  void _onSubmit() {
+    if (_email.isEmpty || _isEmailValid() != null) return;
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
+        builder: (context) => const PasswordScreen(),
       ),
     );
   }
@@ -52,9 +63,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
       onTap: _onScaffoldTap,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Sign up",
-          ),
+          title: const Text('Sign up'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -67,29 +76,22 @@ class _UsernameScreenState extends State<UsernameScreen> {
                 height: 40,
               ),
               const Text(
-                'Create username',
+                'What is your email?',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
-                height: 8,
-              ),
-              const Text(
-                'You can always change this later.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
-              ),
-              const SizedBox(
                 height: 16,
               ),
               TextField(
-                controller: _usernameController,
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                onEditingComplete: _onSubmit,
+                autocorrect: false,
                 decoration: InputDecoration(
-                  hintText: 'Username',
+                  hintText: "Email",
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey.shade400,
@@ -107,9 +109,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
                 height: 28,
               ),
               GestureDetector(
-                onTap: _onNextTap,
+                onTap: _onSubmit,
                 child: FormButton(
-                  disabled: _username.isEmpty,
+                  disabled: _email.isEmpty || _isEmailValid() != null,
                 ),
               ),
             ],

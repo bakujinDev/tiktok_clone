@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/features/authentication/login_form_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,7 +10,14 @@ class LoginScreen extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  
+  void _onEmailLoginTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginFornScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +28,21 @@ class LoginScreen extends StatelessWidget {
             horizontal: 40,
           ),
           child: Column(
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: 80,
               ),
-              Text(
+              const Text(
                 'Log in to TikTok',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Manage your account, check notifications, comment on videos, and more.",
                 style: TextStyle(
                   fontSize: 16,
@@ -44,19 +50,22 @@ class LoginScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              AuthBUtton(
-                text: 'Use email & password',
-                icon: FaIcon(
-                  FontAwesomeIcons.user,
+              GestureDetector(
+                onTap: () => _onEmailLoginTap(context),
+                child: const AuthBUtton(
+                  text: 'Use email & password',
+                  icon: FaIcon(
+                    FontAwesomeIcons.user,
+                  ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              AuthBUtton(
+              const AuthBUtton(
                 text: 'Continue with Apple',
                 icon: FaIcon(
                   FontAwesomeIcons.apple,
