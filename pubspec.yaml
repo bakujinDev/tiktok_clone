@@ -27,4 +27,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/videos/video.mp4
+    - assets/videos/
+    - assets/images/
