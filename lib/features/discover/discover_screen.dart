@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final tabs = [
   "Top",
@@ -56,6 +57,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               controller: _textEditingController,
               onChanged: _onSearchChanged,
               onSubmitted: _onSearchSubmitted,
+              style: TextStyle(
+                  color: isDarkMode(context) ? Colors.white : Colors.black),
             ),
           ),
           bottom: TabBar(
@@ -68,9 +71,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey.shade500,
+            indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
             tabs: [
               for (var tab in tabs)
                 Tab(
@@ -118,6 +119,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
+                              height: 1.1,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -125,46 +127,48 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           const SizedBox(
                             height: 8,
                           ),
-                          if (constraints.maxWidth < 200 ||
-                              constraints.maxWidth > 250)
-                            DefaultTextStyle(
-                              style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              child: Row(
-                                children: [
-                                  const CircleAvatar(
-                                    radius: 12,
-                                    backgroundImage: NetworkImage(
-                                      "https://avatars.githubusercontent.com/u/3612017",
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  const Expanded(
-                                    child: Text(
-                                      'My avatar is going to be very long',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  FaIcon(
-                                    FontAwesomeIcons.heart,
-                                    size: 16,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                  const SizedBox(
-                                    width: 2,
-                                  ),
-                                  const Text('2.5M'),
-                                ],
-                              ),
+                          // if (constraints.maxWidth < 200 ||
+                          //     constraints.maxWidth > 250)
+                          DefaultTextStyle(
+                            style: TextStyle(
+                              color: isDarkMode(context)
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade600,
+                              fontWeight: FontWeight.w600,
                             ),
+                            child: Row(
+                              children: [
+                                const CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage: NetworkImage(
+                                    "https://avatars.githubusercontent.com/u/3612017",
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                const Expanded(
+                                  child: Text(
+                                    'My avatar is going to be very long',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.heart,
+                                  size: 16,
+                                  color: Colors.grey.shade600,
+                                ),
+                                const SizedBox(
+                                  width: 2,
+                                ),
+                                const Text('2.5M'),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     )),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ChatDetailScreen extends StatelessWidget {
   const ChatDetailScreen({super.key});
@@ -27,19 +28,19 @@ class ChatDetailScreen extends StatelessWidget {
           subtitle: const Text('Active now'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               FaIcon(
                 FontAwesomeIcons.flag,
                 size: 20,
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 32,
               ),
               FaIcon(
                 FontAwesomeIcons.ellipsis,
                 size: 20,
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
               ),
             ],
           ),
@@ -94,17 +95,15 @@ class ChatDetailScreen extends StatelessWidget {
           Positioned(
             bottom: 0,
             width: MediaQuery.of(context).size.width,
-            child: BottomAppBar(
-              color: Colors.grey.shade50,
+            child: Container(
+              color: isDarkMode(context) ? Colors.black : Colors.grey.shade50,
               child: Row(
-                children: [
-                  const Expanded(child: TextField()),
-                  const SizedBox(
+                children: const [
+                  Expanded(child: TextField()),
+                  SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    child: const FaIcon(FontAwesomeIcons.paperPlane),
-                  ),
+                  FaIcon(FontAwesomeIcons.paperPlane),
                 ],
               ),
             ),

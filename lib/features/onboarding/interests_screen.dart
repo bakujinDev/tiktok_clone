@@ -148,32 +148,29 @@ class _InterestsScreenState extends State<InterestsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 24,
-            top: 16,
-            right: 24,
-            bottom: 40,
-          ),
-          child: GestureDetector(
-            onTap: _onNextTap,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16 + 2,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-              child: const Text(
-                'Next',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          left: 24,
+          top: 16,
+          right: 24,
+          bottom: 40,
+        ),
+        child: GestureDetector(
+          onTap: _onNextTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16 + 2,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: const Text(
+              'Next',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
               ),
             ),
           ),
