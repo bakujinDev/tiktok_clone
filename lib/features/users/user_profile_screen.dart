@@ -81,7 +81,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         height: 24,
                       ),
                       SizedBox(
-                        height: 48,
+                        // height: 48,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

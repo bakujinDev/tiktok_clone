@@ -11,7 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.4.0
   video_player: ^2.6.0
@@ -21,10 +24,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  flutter_gen_runner:
 
   flutter_lints: ^2.0.0
 
 flutter:
+  generate: true
   uses-material-design: true
 
   assets:
