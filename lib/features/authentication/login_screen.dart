@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => _onEmailLoginTap(context),
-                child: const AuthBUtton(
+                child: const AuthButton(
                   text: 'Use email & password',
                   icon: FaIcon(
                     FontAwesomeIcons.user,
@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              const AuthBUtton(
+              const AuthButton(
                 text: 'Continue with Apple',
                 icon: FaIcon(
                   FontAwesomeIcons.apple,

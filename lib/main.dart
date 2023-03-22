@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/main_navigation_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,21 +26,21 @@ class TikTokApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // S.load(const Locale('en'));
     Color primaryColor = const Color(0xffe9435a);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale("en"),
-        Locale("ko"),
-        Locale("es"),
+        Locale('en'),
+        Locale('ko'),
       ],
       themeMode: ThemeMode.system,
       theme: ThemeData(
@@ -100,7 +101,7 @@ class TikTokApp extends StatelessWidget {
         ),
         primaryColor: primaryColor,
       ),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
     );
     // return const CupertinoApp(
     //   title: 'TikTok Clone',

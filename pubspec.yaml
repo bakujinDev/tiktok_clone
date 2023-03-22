@@ -36,3 +36,6 @@ flutter:
   assets:
     - assets/videos/
     - assets/images/
+
+flutter_intl:
+  enabled: true
