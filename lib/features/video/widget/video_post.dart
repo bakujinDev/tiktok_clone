@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/video/widget/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -123,59 +124,91 @@ class _VideoPostState extends State<VideoPost>
           Positioned(
             left: 10,
             bottom: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            right: 10,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
-                  "@니꼬",
-                  style: TextStyle(
-                    fontSize: Sizes.size20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-                Gaps.v10,
-                const Text(
-                  "This is my house in Thailand!!!",
-                  style: TextStyle(
-                    fontSize: Sizes.size16,
-                    color: Colors.white,
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AnimatedSize(
-                      duration: const Duration(milliseconds: 100),
-                      child: SizedBox(
-                        width: 200,
-                        child: Flexible(
-                          child: Text(
-                            "#googleearth #googlemaps #googleearth #googlemaps #googleearth #googlemaps",
-                            style: const TextStyle(
-                              fontSize: Sizes.size16,
-                              color: Colors.white,
-                            ),
-                            overflow: _isCommentShowMore
-                                ? TextOverflow.visible
-                                : TextOverflow.ellipsis,
-                          ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "@니꼬",
+                        style: TextStyle(
+                          fontSize: Sizes.size20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                         ),
                       ),
-                    ),
-                    Gaps.h10,
-                    GestureDetector(
-                      onTap: _onTapShowCommentMore,
-                      child: const Text(
-                        "More",
+                      Gaps.v10,
+                      const Text(
+                        "This is my house in Thailand!!!",
                         style: TextStyle(
                           fontSize: Sizes.size16,
                           color: Colors.white,
                         ),
                       ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: AnimatedSize(
+                              duration: const Duration(milliseconds: 100),
+                              child: Text(
+                                "#googleearth #googlemaps #googleearth #googlemaps #googleearth #googlemaps",
+                                style: const TextStyle(
+                                  fontSize: Sizes.size16,
+                                  color: Colors.white,
+                                ),
+                                overflow: _isCommentShowMore
+                                    ? TextOverflow.visible
+                                    : TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          Gaps.h10,
+                          GestureDetector(
+                            onTap: _onTapShowCommentMore,
+                            child: const Text(
+                              "More",
+                              style: TextStyle(
+                                fontSize: Sizes.size16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Gaps.h40,
+                Wrap(
+                  direction: Axis.vertical,
+                  spacing: Sizes.size24,
+                  children: const [
+                    CircleAvatar(
+                      radius: 25,
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
+                      foregroundImage: NetworkImage(
+                          'https://avatars.githubusercontent.com/u/3612017'),
+                      child: Text("니꼬"),
+                    ),
+                    VideoButton(
+                      icon: FontAwesomeIcons.solidHeart,
+                      text: "2.9M",
+                    ),
+                    VideoButton(
+                      icon: FontAwesomeIcons.solidComment,
+                      text: "33K",
+                    ),
+                    VideoButton(
+                      icon: FontAwesomeIcons.share,
+                      text: "Share",
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),

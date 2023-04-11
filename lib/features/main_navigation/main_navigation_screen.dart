@@ -60,6 +60,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ];
 
     return Scaffold(
+      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
       body: Stack(
         children: screens,
       ),
