@@ -8,29 +8,38 @@ class VideoButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
+    this.onTap,
   });
 
   final IconData icon;
   final String text;
+  final Function? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FaIcon(
-          icon,
-          size: Sizes.size40,
-          color: Colors.white,
-        ),
-        Gaps.v5,
-        Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
+    return GestureDetector(
+      onTap: () {
+        if (onTap != null) {
+          onTap!();
+        }
+      },
+      child: Column(
+        children: [
+          FaIcon(
+            icon,
+            size: Sizes.size40,
             color: Colors.white,
           ),
-        ),
-      ],
+          Gaps.v5,
+          Text(
+            text,
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

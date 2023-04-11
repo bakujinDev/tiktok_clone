@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/video/widget/video_button.dart';
+import 'package:tiktok_clone/features/video/widget/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -56,7 +57,9 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    if (info.visibleFraction == 1 &&
+        !_isPaused &&
+        !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
   }
@@ -78,6 +81,20 @@ class _VideoPostState extends State<VideoPost>
   void _onTapShowCommentMore() {
     _isCommentShowMore = !_isCommentShowMore;
     setState(() {});
+  }
+
+  void _onCommentsTap(BuildContext context) async {
+    if (_videoPlayerController.value.isPlaying) {
+      _togglePause();
+    }
+
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const VideoComments(),
+    );
+    _togglePause();
   }
 
   @override
@@ -186,8 +203,8 @@ class _VideoPostState extends State<VideoPost>
                 Wrap(
                   direction: Axis.vertical,
                   spacing: Sizes.size24,
-                  children: const [
-                    CircleAvatar(
+                  children: [
+                    const CircleAvatar(
                       radius: 25,
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.black,
@@ -195,15 +212,16 @@ class _VideoPostState extends State<VideoPost>
                           'https://avatars.githubusercontent.com/u/3612017'),
                       child: Text("니꼬"),
                     ),
-                    VideoButton(
+                    const VideoButton(
                       icon: FontAwesomeIcons.solidHeart,
                       text: "2.9M",
                     ),
                     VideoButton(
                       icon: FontAwesomeIcons.solidComment,
                       text: "33K",
+                      onTap: () => _onCommentsTap(context),
                     ),
-                    VideoButton(
+                    const VideoButton(
                       icon: FontAwesomeIcons.share,
                       text: "Share",
                     ),
