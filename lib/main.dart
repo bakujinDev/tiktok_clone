@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -17,6 +17,8 @@ class TikTokApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: const Color(0xffe9435a),
           scaffoldBackgroundColor: Colors.white,
+          splashColor: const Color(0x11e9435a),
+          highlightColor: const Color(0x33e9435a),
           appBarTheme: const AppBarTheme(
             centerTitle: true,
             foregroundColor: Colors.black,
@@ -31,7 +33,7 @@ class TikTokApp extends StatelessWidget {
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Color(0xffe9435a),
           )),
-      home: const MainNavigationScreen(),
+      home: const ActivityScreen(),
     );
   }
 }
