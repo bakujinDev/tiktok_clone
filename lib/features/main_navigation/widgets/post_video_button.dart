@@ -6,9 +6,11 @@ class PostVideoButton extends StatelessWidget {
   const PostVideoButton({
     super.key,
     required this.onTap,
+    required this.inverted,
   });
 
   final Function onTap;
+  final bool inverted;
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +59,16 @@ class PostVideoButton extends StatelessWidget {
                   width: 40,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: inverted ? Colors.black : Colors.white,
                     borderRadius: BorderRadius.circular(
                       Sizes.size6,
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: FaIcon(
                       FontAwesomeIcons.plus,
                       size: Sizes.size16 + Sizes.size2,
-                      color: Colors.black,
+                      color: inverted ? Colors.white : Colors.black,
                     ),
                   ),
                 )
