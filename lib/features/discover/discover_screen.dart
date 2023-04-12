@@ -56,10 +56,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     _textEditingController.clear();
   }
 
-  void _onSearchChanged(String value) {}
-
-  void _onSearchSubmitted(String value) {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

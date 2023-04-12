@@ -92,7 +92,7 @@ class _ActivityScreenState extends State<ActivityScreen>
         title: GestureDetector(
           onTap: _toggleAnimation,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text("All Activity"),
               Gaps.h2,
