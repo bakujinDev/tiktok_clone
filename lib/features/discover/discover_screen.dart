@@ -65,7 +65,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 1,
-        title: ConstrainedBox(
+        title: Container(
+          height: 40,
           constraints: const BoxConstraints(
             maxWidth: Breakpoints.sm,
           ),
