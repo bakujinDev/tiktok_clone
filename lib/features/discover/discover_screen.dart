@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
@@ -58,12 +59,16 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 1,
-        title: SizedBox(
-          height: 40,
+        title: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: Breakpoints.sm,
+          ),
           child: TextField(
             controller: _textEditingController,
             onTap: _startWriting,
@@ -138,73 +143,78 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           GridView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.all(Sizes.size6),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: width > Breakpoints.lg ? 5 : 2,
               mainAxisSpacing: Sizes.size10,
               crossAxisSpacing: Sizes.size10,
               childAspectRatio: 9 / 20,
             ),
-            itemBuilder: (context, index) => Column(
-              children: [
-                Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Sizes.size4),
-                  ),
-                  child: AspectRatio(
-                    aspectRatio: 9 / 16,
-                    child: FadeInImage.assetNetwork(
-                      fit: BoxFit.cover,
-                      placeholder: 'assets/images/placeholder.jpg',
-                      image:
-                          'https://source.unsplash.com/random/200x${355 + index}',
+            itemBuilder: (context, index) => LayoutBuilder(
+              builder: (context, constraints) => Column(
+                children: [
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Sizes.size4),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 9 / 16,
+                      child: FadeInImage.assetNetwork(
+                        fit: BoxFit.cover,
+                        placeholder: 'assets/images/placeholder.jpg',
+                        image:
+                            'https://source.unsplash.com/random/200x${355 + index}',
+                      ),
                     ),
                   ),
-                ),
-                Gaps.v10,
-                const Text(
-                  'This is a very long caption for my tiktok that im upload just now currently.',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: Sizes.size18,
-                    fontWeight: FontWeight.w700,
+                  Gaps.v10,
+                  const Text(
+                    'This is a very long caption for my tiktok that im upload just now currently.',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: Sizes.size18,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-                Gaps.v10,
-                DefaultTextStyle(
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade500,
-                  ),
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 12,
-                        backgroundImage: NetworkImage(
-                            'https://avatars.githubusercontent.com/u/3612017'),
+                  if (constraints.maxWidth < 200 ||
+                      constraints.maxWidth > 250) ...[
+                    Gaps.v10,
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey.shade500,
                       ),
-                      Gaps.h4,
-                      const Expanded(
-                        child: Text(
-                          'My avatar is going to be very long',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 12,
+                            backgroundImage: NetworkImage(
+                                'https://avatars.githubusercontent.com/u/3612017'),
+                          ),
+                          Gaps.h4,
+                          const Expanded(
+                            child: Text(
+                              'My avatar is going to be very long',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            size: Sizes.size16,
+                            color: Colors.grey.shade600,
+                          ),
+                          Gaps.h2,
+                          const Text(
+                            '2.5M',
+                          ),
+                        ],
                       ),
-                      FaIcon(
-                        FontAwesomeIcons.heart,
-                        size: Sizes.size16,
-                        color: Colors.grey.shade600,
-                      ),
-                      Gaps.h2,
-                      const Text(
-                        '2.5M',
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
           for (var tab in tabs.skip(1))
