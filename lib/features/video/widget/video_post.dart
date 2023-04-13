@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -27,6 +28,7 @@ class _VideoPostState extends State<VideoPost>
   late final AnimationController _animationController;
 
   bool _isPaused = false;
+  bool _isMuted = false;
   bool _isCommentShowMore = false;
 
   @override
@@ -52,8 +54,12 @@ class _VideoPostState extends State<VideoPost>
 
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
+    await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      _isMuted = true;
+    }
     setState(() {});
-    _videoPlayerController.setLooping(true);
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
@@ -100,6 +106,18 @@ class _VideoPostState extends State<VideoPost>
       builder: (context) => const VideoComments(),
     );
     _togglePause();
+  }
+
+  void _toggleMute() {
+    if (_videoPlayerController.value.volume == 0) {
+      _videoPlayerController.setVolume(1);
+      _isMuted = false;
+    } else {
+      _videoPlayerController.setVolume(0);
+      _isMuted = true;
+    }
+
+    setState(() {});
   }
 
   @override
@@ -229,6 +247,13 @@ class _VideoPostState extends State<VideoPost>
                     const VideoButton(
                       icon: FontAwesomeIcons.share,
                       text: "Share",
+                    ),
+                    VideoButton(
+                      icon: _isMuted
+                          ? FontAwesomeIcons.volumeOff
+                          : FontAwesomeIcons.volumeHigh,
+                      text: "Share",
+                      onTap: _toggleMute,
                     ),
                   ],
                 )
