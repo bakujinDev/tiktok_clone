@@ -31,8 +31,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    S.load(const Locale("ko"));
-
     return OrientationBuilder(
       builder: (context, orientation) => Scaffold(
         body: SafeArea(
