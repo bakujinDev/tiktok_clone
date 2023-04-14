@@ -11,8 +11,8 @@ import 'package:tiktok_clone/utils.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
-    Navigator.push(
+  void onLoginTap(BuildContext context) async {
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
@@ -23,9 +23,30 @@ class SignUpScreen extends StatelessWidget {
   void _onUsernameTap(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const UsernameScreen(),
-      ),
+      PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 300),
+          reverseTransitionDuration: const Duration(milliseconds: 300),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const UsernameScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final offsetAnimation = Tween(
+              begin: const Offset(-1, 0),
+              end: Offset.zero,
+            ).animate(animation);
+
+            final opacityAnimation = Tween(
+              begin: 0.5,
+              end: 1.0,
+            ).animate(animation);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: FadeTransition(
+                opacity: opacityAnimation,
+                child: child,
+              ),
+            );
+          }),
     );
   }
 
@@ -40,7 +61,7 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Gaps.v80,
                 Text(
-                  S.of(context).signUpTitle("TikTok", DateTime.now()),
+                  S.of(context).signUpTitle("TikTok"),
                   style: const TextStyle(
                     fontSize: Sizes.size24,
                     fontWeight: FontWeight.w700,
