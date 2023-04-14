@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Localizations.localeOf(context));
+    S.load(const Locale("ko"));
 
     return OrientationBuilder(
       builder: (context, orientation) => Scaffold(
@@ -52,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
                 Opacity(
                   opacity: 0.7,
                   child: Text(
-                    S.of(context).signUpSubtitle,
+                    S.of(context).signUpSubtitle(10),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: Sizes.size16,
@@ -113,7 +113,7 @@ class SignUpScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () => onLoginTap(context),
                   child: Text(
-                    S.of(context).logIn,
+                    S.of(context).logIn('aa'),
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).primaryColor,
