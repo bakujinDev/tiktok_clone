@@ -7,7 +7,7 @@ import 'package:tiktok_clone/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_clone/features/users/widgets/user_count.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  static String routeName = "/users";
+  static String routeUrl = "/users";
 
   final String username;
   final String tab;
