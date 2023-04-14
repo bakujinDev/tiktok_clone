@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/username_screen.dart';
+import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/features/users/user_profile_screen.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
@@ -12,20 +14,13 @@ class SignUpScreen extends StatelessWidget {
 
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) async {
-    final result = await Navigator.pushNamed(
-      context,
-      '/login',
-    );
-
-    print(result);
+  void onLoginTap(BuildContext context) {
+    context.push(LoginScreen.routeName);
   }
 
   void _onUsernameTap(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      UsernameScreen.routeName,
-    );
+    // context.push(UsernameScreen.routeName);
+    context.push('${UserProfileScreen.routeName}/lynn?show=likes');
 
     // Navigator.push(
     //   context,

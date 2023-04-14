@@ -7,7 +7,16 @@ import 'package:tiktok_clone/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_clone/features/users/widgets/user_count.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  static String routeName = "/users";
+
+  final String username;
+  final String tab;
+
+  const UserProfileScreen({
+    super.key,
+    required this.username,
+    required this.tab,
+  });
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -44,11 +53,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
+        initialIndex: widget.tab == 'likes' ? 1 : 0,
         length: tabs.length,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
-              title: const Text("니꼬"),
+              title: Text(widget.username),
               actions: [
                 IconButton(
                   onPressed: _onGearPressed,
@@ -62,19 +72,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 50,
-                    foregroundImage: NetworkImage(
+                    foregroundImage: const NetworkImage(
                         'https://avatars.githubusercontent.com/u/3612017'),
-                    child: Text("니꼬"),
+                    child: Text(widget.username),
                   ),
                   Gaps.v20,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "@니꼬",
-                        style: TextStyle(
+                      Text(
+                        "@${widget.username}",
+                        style: const TextStyle(
                           fontSize: Sizes.size18,
                           fontWeight: FontWeight.w600,
                         ),

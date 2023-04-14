@@ -40,7 +40,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
     var screens = [
       Offstage(
         offstage: _selectedIndex != 0,
@@ -56,7 +55,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       Offstage(
         offstage: _selectedIndex != 4,
-        child: const UserProfileScreen(),
+        child: const UserProfileScreen(
+          username: "니꼬",
+          tab: "",
+        ),
       ),
     ];
 
