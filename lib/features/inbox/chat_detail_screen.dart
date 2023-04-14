@@ -143,7 +143,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              child: BottomAppBar(
+              child: Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: Sizes.size8,
                   horizontal: Sizes.size12,
