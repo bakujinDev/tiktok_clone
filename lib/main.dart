@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tiktok_clone/features/settings/settings_screen.dart';
 import 'package:tiktok_clone/theme.dart';
 
 void main() async {
@@ -21,9 +22,18 @@ class TikTokApp extends StatelessWidget {
       title: 'TikTok',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+      ],
       theme: kTheme,
       darkTheme: kDarkTheme,
-      home: const SignUpScreen(),
+      home: const SettingsScreen(),
     );
   }
 }
