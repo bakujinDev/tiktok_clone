@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -32,6 +33,7 @@ class _VideoCommentsState extends State<VideoComments> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     final size = MediaQuery.of(context).size;
     final ScrollController scrollController = ScrollController();
 
@@ -44,10 +46,10 @@ class _VideoCommentsState extends State<VideoComments> {
       ),
       clipBehavior: Clip.hardEdge,
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: isDark ? null : Colors.grey.shade50,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.grey.shade50,
+          backgroundColor: isDark ? null : Colors.grey.shade50,
           title: const Text('22796 comments'),
           actions: [
             IconButton(
@@ -75,9 +77,10 @@ class _VideoCommentsState extends State<VideoComments> {
                   itemBuilder: (context, index) => Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: Sizes.size18,
-                        child: Text("니꼬"),
+                        backgroundColor: isDark ? Colors.grey.shade800 : null,
+                        child: const Text("니꼬"),
                       ),
                       Gaps.h10,
                       Expanded(
@@ -122,7 +125,6 @@ class _VideoCommentsState extends State<VideoComments> {
                 width: size.width,
                 bottom: 0,
                 child: BottomAppBar(
-                  color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: Sizes.size10,
@@ -163,15 +165,21 @@ class _VideoCommentsState extends State<VideoComments> {
                                     children: [
                                       FaIcon(
                                         FontAwesomeIcons.at,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       FaIcon(
                                         FontAwesomeIcons.gift,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       FaIcon(
                                         FontAwesomeIcons.faceSmile,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       if (_isWriting)
                                         GestureDetector(
@@ -186,7 +194,9 @@ class _VideoCommentsState extends State<VideoComments> {
                                   ),
                                 ),
                                 filled: true,
-                                fillColor: Colors.grey.shade200,
+                                fillColor: isDark
+                                    ? Colors.grey.shade800
+                                    : Colors.grey.shade200,
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.circular(Sizes.size12),

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final tabs = [
   "Top",
@@ -73,9 +74,14 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           child: TextField(
             controller: _textEditingController,
             onTap: _startWriting,
+            style: TextStyle(
+              color: isDarkMode(context) ? Colors.white : Colors.black,
+            ),
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.grey.shade200,
+              fillColor: isDarkMode(context)
+                  ? Colors.grey.shade700
+                  : Colors.grey.shade200,
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(Sizes.size12),
@@ -94,7 +100,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     FaIcon(
                       FontAwesomeIcons.magnifyingGlass,
                       size: Sizes.size14,
-                      color: Colors.grey.shade700,
+                      color: isDarkMode(context)
+                          ? Colors.grey.shade200
+                          : Colors.grey.shade700,
                     ),
                   ],
                 ),
@@ -108,7 +116,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       child: FaIcon(
                         FontAwesomeIcons.solidCircleXmark,
                         size: Sizes.size14,
-                        color: Colors.grey.shade700,
+                        color: isDarkMode(context)
+                            ? Colors.grey.shade200
+                            : Colors.grey.shade700,
                       ),
                     ),
                 ],
@@ -122,13 +132,11 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             horizontal: Sizes.size16,
           ),
           isScrollable: true,
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey.shade500,
-          indicatorColor: Colors.black,
           labelStyle: const TextStyle(
             fontSize: Sizes.size16,
             fontWeight: FontWeight.w600,
           ),
+          indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
           splashFactory: NoSplash.splashFactory,
           tabs: [
             for (var tab in tabs)
@@ -204,7 +212,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           FaIcon(
                             FontAwesomeIcons.heart,
                             size: Sizes.size16,
-                            color: Colors.grey.shade600,
+                            color: isDarkMode(context)
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade600,
                           ),
                           Gaps.h2,
                           const Text(

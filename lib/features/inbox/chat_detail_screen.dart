@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key});
@@ -37,6 +38,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
+
     return GestureDetector(
       onTap: _unFocusTextEditor,
       child: Scaffold(
@@ -83,13 +86,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 FaIcon(
                   FontAwesomeIcons.flag,
                   size: Sizes.size20,
-                  color: Colors.black,
                 ),
                 Gaps.h32,
                 FaIcon(
                   FontAwesomeIcons.ellipsis,
                   size: Sizes.size20,
-                  color: Colors.black,
                 ),
               ],
             ),
@@ -147,7 +148,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   vertical: Sizes.size8,
                   horizontal: Sizes.size12,
                 ),
-                color: Colors.grey.shade100,
+                color: isDark ? Colors.grey.shade900 : Colors.grey.shade100,
                 child: Row(
                   children: [
                     Expanded(
@@ -162,7 +163,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               vertical: 0,
                             ),
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor:
+                                isDark ? Colors.grey.shade500 : Colors.white,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(Sizes.size12),
                               borderSide: BorderSide.none,
@@ -172,7 +174,6 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               icon: const FaIcon(
                                 FontAwesomeIcons.faceLaugh,
                                 size: Sizes.size18,
-                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -189,7 +190,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           shape: BoxShape.circle,
                           color: _textEditingController.value.text.isNotEmpty
                               ? Theme.of(context).primaryColor
-                              : Colors.grey.shade300,
+                              : isDark
+                                  ? Colors.grey.shade700
+                                  : Colors.grey.shade300,
                         ),
                         child: const Center(
                           child: FaIcon(

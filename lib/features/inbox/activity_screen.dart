@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -87,6 +88,8 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
+
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
@@ -162,16 +165,17 @@ class _ActivityScreenState extends State<ActivityScreen>
                       width: Sizes.size52,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
+                        color: isDark ? Colors.grey.shade900 : Colors.white,
                         border: Border.all(
                           width: Sizes.size1,
-                          color: Colors.grey.shade400,
+                          color: isDark
+                              ? Colors.grey.shade900
+                              : Colors.grey.shade400,
                         ),
                       ),
                       child: const Center(
                         child: FaIcon(
                           FontAwesomeIcons.bell,
-                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -181,7 +185,6 @@ class _ActivityScreenState extends State<ActivityScreen>
                         style: const TextStyle(
                           fontSize: Sizes.size16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
                         ),
                         children: [
                           const TextSpan(
@@ -203,7 +206,6 @@ class _ActivityScreenState extends State<ActivityScreen>
                     trailing: const FaIcon(
                       FontAwesomeIcons.chevronRight,
                       size: Sizes.size14,
-                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -218,9 +220,9 @@ class _ActivityScreenState extends State<ActivityScreen>
           SlideTransition(
             position: _panelAnimation,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: isDark ? Colors.grey.shade800 : Colors.white,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(Sizes.size4),
                   bottomRight: Radius.circular(Sizes.size4),
                 ),
@@ -234,7 +236,6 @@ class _ActivityScreenState extends State<ActivityScreen>
                       leading: FaIcon(
                         tab['icon'],
                         size: Sizes.size16,
-                        color: Colors.black,
                       ),
                       title: Text(
                         tab['title'],

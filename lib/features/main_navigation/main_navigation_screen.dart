@@ -7,6 +7,7 @@ import 'package:tiktok_clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktok_clone/features/users/user_profile_screen.dart';
 import 'package:tiktok_clone/features/video/video_timeline_screen.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -39,6 +40,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     var screens = [
       Offstage(
         offstage: _selectedIndex != 0,
@@ -59,13 +61,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ];
 
     return Scaffold(
-      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: screens,
       ),
       bottomNavigationBar: BottomAppBar(
-        color: _selectedIndex == 0 ? Colors.black : Colors.white,
+        color: _selectedIndex == 0 || isDarkMode(context)
+            ? Colors.black
+            : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(Sizes.size12),
           child: Row(
@@ -89,7 +93,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
               PostVideoButton(
                 onTap: _onPostVideoButtonTap,
-                inverted: _selectedIndex != 0,
+                inverted: _selectedIndex == 0,
               ),
               NavTab(
                 icon: FontAwesomeIcons.message,
