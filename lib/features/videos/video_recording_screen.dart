@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/video_preview_screen.dart';
 import 'package:tiktok_clone/features/videos/widget/flash_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
@@ -40,6 +41,22 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     upperBound: 1.0,
   );
 
+  Future<void> initCamera() async {
+    final cameras = await availableCameras();
+
+    if (cameras.isEmpty) return;
+
+    _cameraController = CameraController(
+      cameras[_isSelfieMode ? 1 : 0],
+      ResolutionPreset.ultraHigh,
+      imageFormatGroup: ImageFormatGroup.yuv420,
+    );
+
+    await _cameraController.initialize();
+    await _cameraController.prepareForVideoRecording();
+    _flashMode = _cameraController.value.flashMode;
+  }
+
   Future<void> initPermission() async {
     final cameraPermission = await Permission.camera.request();
     final micPermission = await Permission.microphone.request();
@@ -66,21 +83,6 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     }
   }
 
-  Future<void> initCamera() async {
-    final cameras = await availableCameras();
-
-    if (cameras.isEmpty) return;
-
-    _cameraController = CameraController(
-      cameras[_isSelfieMode ? 1 : 0],
-      ResolutionPreset.ultraHigh,
-      imageFormatGroup: ImageFormatGroup.yuv420,
-    );
-
-    await _cameraController.initialize();
-    _flashMode = _cameraController.value.flashMode;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -91,6 +93,14 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     _progressAnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) _stopRecording();
     });
+  }
+
+  @override
+  void dispose() {
+    _cameraController.dispose();
+    _buttonAnimationController.dispose();
+    _progressAnimationController.dispose();
+    super.dispose();
   }
 
   Future<void> toggleSelfieMode() async {
@@ -106,14 +116,30 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     setState(() {});
   }
 
-  void _startRecording(TapDownDetails _) {
+  Future<void> _startRecording(TapDownDetails _) async {
+    if (_cameraController.value.isRecordingVideo) return;
+
+    await _cameraController.startVideoRecording();
+
     _buttonAnimationController.forward();
     _progressAnimationController.forward();
   }
 
-  void _stopRecording() {
+  Future<void> _stopRecording() async {
+    if (!_cameraController.value.isRecordingVideo) return;
+
     _buttonAnimationController.reverse();
     _progressAnimationController.reset();
+
+    final file = await _cameraController.stopVideoRecording();
+
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VideoPreviewScreen(video: file),
+      ),
+    );
   }
 
   @override
