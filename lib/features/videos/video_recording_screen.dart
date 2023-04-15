@@ -17,12 +17,14 @@ class VideoRecordingScreen extends StatefulWidget {
 }
 
 class _VideoRecordingScreenState extends State<VideoRecordingScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
   bool _isSelfieMode = false;
+  double _zoomLevel = 1;
 
   late CameraController _cameraController;
   late FlashMode _flashMode;
+  late double _maxZoomLevel;
 
   late final AnimationController _buttonAnimationController =
       AnimationController(
@@ -56,7 +58,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
     await _cameraController.initialize();
     await _cameraController.prepareForVideoRecording();
+    _maxZoomLevel = await _cameraController.getMaxZoomLevel();
     _flashMode = _cameraController.value.flashMode;
+
+    setState(() {});
   }
 
   Future<void> initPermission() async {
@@ -89,6 +94,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void initState() {
     super.initState();
     initPermission();
+    WidgetsBinding.instance.addObserver(this);
     _progressAnimationController.addListener(() {
       setState(() {});
     });
@@ -103,6 +109,18 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     _buttonAnimationController.dispose();
     _progressAnimationController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_hasPermission) return;
+    if (!_cameraController.value.isInitialized) return;
+
+    if (state == AppLifecycleState.inactive) {
+      _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      initCamera();
+    }
   }
 
   Future<void> toggleSelfieMode() async {
@@ -163,6 +181,19 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
         ),
       ),
     );
+  }
+
+  void _onVerticalDrag(DragUpdateDetails details) {
+    int zoomDelay = 100;
+    double zoomPercent = -details.delta.dy * _maxZoomLevel / (100 * zoomDelay);
+
+    if (_zoomLevel + zoomPercent > _maxZoomLevel ||
+        _zoomLevel + zoomPercent < 1) {
+      return;
+    }
+
+    _zoomLevel = _zoomLevel + zoomPercent;
+    _cameraController.setZoomLevel(_zoomLevel);
   }
 
   @override
@@ -240,6 +271,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                           GestureDetector(
                             onTapDown: _startRecording,
                             onTapUp: (details) => _stopRecording(),
+                            onVerticalDragUpdate: _onVerticalDrag,
                             child: ScaleTransition(
                               scale: _buttonAnimation,
                               child: Stack(
