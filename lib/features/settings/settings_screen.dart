@@ -16,7 +16,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _onNotificationsChanged(bool? newValue) {
     if (newValue == null) return;
-    VideoConfigData.of(context).toggleMuted();
     setState(() {
       _notifications = newValue;
     });
@@ -33,6 +32,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         body: ListView(
           children: [
+            AnimatedBuilder(
+              animation: videoConfig,
+              builder: (context, child) => SwitchListTile.adaptive(
+                title: const Text("Auto Mute"),
+                subtitle: const Text("Videos will be muted by default."),
+                value: videoConfig.autoMute,
+                onChanged: (value) {
+                  videoConfig.toggleAutoMute();
+                },
+              ),
+            ),
             Switch.adaptive(
               value: _notifications,
               onChanged: _onNotificationsChanged,
@@ -43,12 +53,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Switch(
               value: _notifications,
-              onChanged: _onNotificationsChanged,
-            ),
-            SwitchListTile.adaptive(
-              title: const Text("Auto Mute"),
-              subtitle: const Text("Videos will be muted by default."),
-              value: VideoConfigData.of(context).autoMute,
               onChanged: _onNotificationsChanged,
             ),
             Checkbox(
