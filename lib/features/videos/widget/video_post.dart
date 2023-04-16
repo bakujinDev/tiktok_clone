@@ -33,7 +33,7 @@ class _VideoPostState extends State<VideoPost>
   bool _isMuted = false;
   bool _isCommentShowMore = false;
 
-  bool _autoMute = videoConfig.autoMute;
+  bool _autoMute = videoConfig.value;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _VideoPostState extends State<VideoPost>
 
     videoConfig.addListener(() {
       setState(() {
-        _autoMute = videoConfig.autoMute;
+        _autoMute = videoConfig.value;
       });
     });
   }
@@ -182,7 +182,7 @@ class _VideoPostState extends State<VideoPost>
                 color: Colors.white,
               ),
               onPressed: () {
-                videoConfig.toggleAutoMute();
+                videoConfig.value = !videoConfig.value;
               },
             ),
           ),
