@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/onboarding/tutorial_screen.dart';
@@ -46,6 +47,9 @@ const interests = [
 ];
 
 class InterestsScreen extends StatefulWidget {
+  static const String routeName = 'interests';
+  static const String routeUrl = '/tutorial';
+
   const InterestsScreen({super.key});
 
   @override

@@ -20,7 +20,12 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _onUsernameTap(BuildContext context) {
-    context.pushNamed(UsernameScreen.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
     // context.push('${UserProfileScreen.routeName}/lynn?show=likes');
 
     // Navigator.push(
