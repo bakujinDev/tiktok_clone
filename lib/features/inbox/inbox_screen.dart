@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/inbox/chats_screen.dart';
@@ -8,21 +9,11 @@ class InboxScren extends StatelessWidget {
   const InboxScren({super.key});
 
   void _onDmPressed(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ChatsScreen(),
-      ),
-    );
+    context.pushNamed(ChatsScreen.routeName);
   }
 
   void _onActivityTap(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ActivityScreen(),
-      ),
-    );
+    context.pushNamed(ActivityScreen.routeName);
   }
 
   @override
@@ -33,7 +24,7 @@ class InboxScren extends StatelessWidget {
         title: const Text("Inbox"),
         actions: [
           IconButton(
-            onPressed: ()=>_onDmPressed(context),
+            onPressed: () => _onDmPressed(context),
             icon: const FaIcon(FontAwesomeIcons.paperPlane),
           )
         ],
