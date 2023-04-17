@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlaybackConfigRepository {
-  static const String _muted = 'autoplay';
+  static const String _muted = 'muted';
   static const String _autoplay = 'autoplay';
 
   final SharedPreferences _preferences;
