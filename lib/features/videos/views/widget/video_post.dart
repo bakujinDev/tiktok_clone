@@ -57,9 +57,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       _videoPlayerController.play();
     }
 
-    // context
-    //     .read<PlaybackConfigViewModel>()
-    //     .addListener(_onPlaybackConfigChanged);
+    
   }
 
   @override
@@ -77,16 +75,6 @@ class VideoPostState extends ConsumerState<VideoPost>
       _isMuted = true;
     }
     setState(() {});
-  }
-
-  void _onPlaybackConfigChanged() {
-    if (!mounted) return;
-
-    if (_isMuted) {
-      _videoPlayerController.setVolume(0);
-    } else {
-      _videoPlayerController.setVolume(1);
-    }
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {

@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "574678010329",
+    "firebase_url": "https://flutter-practice-e2045-default-rtdb.firebaseio.com",
+    "project_id": "flutter-practice-e2045",
+    "storage_bucket": "flutter-practice-e2045.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574678010329:android:5023110350ba2ad37871c8",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv9C2loIadZBfhkllReF2bIWuCaZtWoBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ujinbak.tiktokClone"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574678010329:android:6fd6520bf077c65e7871c8",
+        "android_client_info": {
+          "package_name": "com.ujin.flutter_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv9C2loIadZBfhkllReF2bIWuCaZtWoBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ujinbak.tiktokClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

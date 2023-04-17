@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCnp7N6TgOOt7RTgcZON6TLcJB49PmCKUw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>574678010329</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ujinbak.tiktokClone</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-practice-e2045</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-practice-e2045.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:574678010329:ios:b351da1e865d4a3d7871c8</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-practice-e2045-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
