@@ -14,9 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await SystemChrome.setPreferredOrientations(
     [
@@ -40,16 +38,16 @@ void main() async {
   );
 }
 
-class TikTokApp extends StatelessWidget {
+class TikTokApp extends ConsumerWidget {
   const TikTokApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     S.load(const Locale("ko"));
 
     return Builder(builder: (context) {
       return MaterialApp.router(
-        routerConfig: router,
+        routerConfig: ref.watch(routerProvider),
         title: 'TikTok',
         debugShowCheckedModeBanner: false,
         // themeMode: context.watch<VideoConfig>().isDark
