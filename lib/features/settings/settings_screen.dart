@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tiktok_clone/common/widgets/video_config/video_config.dart';
+import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -16,7 +16,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifications = false;
 
   void _onNotificationsChanged(bool? newValue) {
-    context.read<VideoConfig>().toggleIsMuted();
     if (newValue == null) return;
 
     setState(() {
@@ -38,15 +37,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SwitchListTile.adaptive(
               title: const Text("Auto Mute"),
               subtitle: const Text("Videos will be muted by default."),
-              value: context.watch<VideoConfig>().isMuted,
-              onChanged: _onNotificationsChanged,
+              value: context.watch<PlaybackConfigViewModel>().muted,
+              onChanged: (value) =>
+                  context.read<PlaybackConfigViewModel>().setMuted(value),
             ),
             SwitchListTile.adaptive(
-              title: const Text("Is Dark"),
-              subtitle: const Text("Set Device DarkMode."),
-              value: context.watch<VideoConfig>().isDark,
-              onChanged: (value) => context.read<VideoConfig>().toggleIsDark(),
+              title: const Text("Auto Play"),
+              subtitle: const Text("Videos will be autoplay by default."),
+              value: context.watch<PlaybackConfigViewModel>().autoplay,
+              onChanged: (value) =>
+                  context.read<PlaybackConfigViewModel>().setAutoplay(value),
             ),
+            // SwitchListTile.adaptive(
+            //   title: const Text("Is Dark"),
+            //   subtitle: const Text("Set Device DarkMode."),
+            //   value: context.watch<VideoConfig>().isDark,
+            //   onChanged: (value) => context.read<VideoConfig>().toggleIsDark(),
+            // ),
             Switch.adaptive(
               value: _notifications,
               onChanged: _onNotificationsChanged,
