@@ -25,7 +25,7 @@ class FormButton extends StatelessWidget {
           }
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 300),
           padding: const EdgeInsets.symmetric(
             vertical: Sizes.size16,
           ),
@@ -37,7 +37,7 @@ class FormButton extends StatelessWidget {
                   : Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(Sizes.size5)),
           child: AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 300),
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: disabled ? Colors.grey.shade400 : Colors.white,

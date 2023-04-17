@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/birthday_screen.dart';
+import 'package:tiktok_clone/features/authentication/view_models/signup_view_model.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
+class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   String _password = '';
@@ -36,12 +38,20 @@ class _PasswordScreenState extends State<PasswordScreen> {
     super.dispose();
   }
 
-  String? _isPasswordValid() {
+  String? _passwordErrText() {
     if (_password.isEmpty) return null;
 
     if (_password.length < 8) return "more than length 8";
 
     return null;
+  }
+
+  bool _isPasswordValid() {
+    if (_password.isEmpty) return false;
+
+    if (_passwordErrText() != null) return false;
+
+    return true;
   }
 
   void _onScaffoldTap() {
@@ -57,19 +67,21 @@ class _PasswordScreenState extends State<PasswordScreen> {
     setState(() {});
   }
 
-  void _onFormButtonTap() {
+  void _onSubmit() {
+    if (!_isPasswordValid()) return;
+
+    final state = ref.read(signUpForm.notifier).state;
+    ref.read(signUpForm.notifier).state = {
+      ...state,
+      "password": _password,
+    };
+
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const BirthdayScreen(),
       ),
     );
-  }
-
-  void _onSubmit() {
-    if (_isPasswordValid() != null) return;
-
-    _onFormButtonTap();
   }
 
   @override
@@ -127,7 +139,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     ],
                   ),
                   hintText: "Make it strong!",
-                  errorText: _isPasswordValid(),
+                  errorText: _passwordErrText(),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey.shade400,
@@ -159,7 +171,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         FontAwesomeIcons.circleCheck,
                         size: Sizes.size20,
                         color:
-                            _password.isNotEmpty && _isPasswordValid() == null
+                            _password.isNotEmpty && _passwordErrText() == null
                                 ? Colors.green
                                 : Colors.grey.shade400,
                       ),
@@ -171,8 +183,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
               Gaps.v16,
               FormButton(
                 text: "Next",
-                disabled: _isPasswordValid() != null,
-                onTap: _onFormButtonTap,
+                disabled: !_isPasswordValid(),
+                onTap: _onSubmit,
               ),
             ],
           ),
