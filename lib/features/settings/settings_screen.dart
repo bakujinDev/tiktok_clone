@@ -106,7 +106,7 @@ class SettingsScreen extends ConsumerWidget {
               title: const Text("What is your birthday?"),
             ),
             ListTile(
-              title: const Text("Log out (iOs)"),
+              title: const Text("Log out (iOS)"),
               textColor: Colors.red,
               onTap: () {
                 showCupertinoDialog(
@@ -148,7 +148,10 @@ class SettingsScreen extends ConsumerWidget {
                         icon: const FaIcon(FontAwesomeIcons.car),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          ref.read(authRepo).signOut();
+                          context.go('/');
+                        },
                         child: const Text("Yes"),
                       ),
                     ],
@@ -173,7 +176,10 @@ class SettingsScreen extends ConsumerWidget {
                       ),
                       CupertinoActionSheetAction(
                         isDestructiveAction: true,
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          ref.read(authRepo).signOut();
+                          context.go('/');
+                        },
                         child: const Text("Yes plz"),
                       ),
                     ],
