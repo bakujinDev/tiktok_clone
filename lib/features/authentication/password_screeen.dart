@@ -70,7 +70,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   void _onSubmit() {
     if (!_isPasswordValid()) return;
 
-    final state = ref.read(signUpForm.notifier).state;
+    final state = ref.read(signUpForm);
     ref.read(signUpForm.notifier).state = {
       ...state,
       "password": _password,

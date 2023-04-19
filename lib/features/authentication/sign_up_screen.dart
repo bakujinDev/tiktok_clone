@@ -61,7 +61,7 @@ class SignUpScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return OrientationBuilder(
       builder: (context, orientation) => Scaffold(
         body: SafeArea(
@@ -97,11 +97,12 @@ class SignUpScreen extends ConsumerWidget {
                   ),
                   Gaps.v16,
                   AuthButton(
-                icon: const FaIcon(FontAwesomeIcons.github),
-                text: "Continue with Github",
-                onTap: () =>
-                    ref.read(socialAuthProvider.notifier).githubSignIn(context),
-              ),
+                    icon: const FaIcon(FontAwesomeIcons.github),
+                    text: "Continue with Github",
+                    onTap: () => ref
+                        .read(socialAuthProvider.notifier)
+                        .githubSignIn(context),
+                  ),
                 ],
                 if (orientation == Orientation.landscape) ...[
                   Row(
