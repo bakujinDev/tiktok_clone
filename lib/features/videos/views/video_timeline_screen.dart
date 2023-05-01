@@ -11,7 +11,7 @@ class VideoTimelineScreen extends ConsumerStatefulWidget {
 }
 
 class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
-  int _itemCount = 4;
+  int _itemCount = 0;
   final PageController _pageController = PageController();
   final Duration _scrollDuration = const Duration(milliseconds: 250);
   final Curve _scrollCurve = Curves.linear;
@@ -24,7 +24,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     );
 
     if (page == _itemCount - 1) {
-      _itemCount += 4;
+      ref.watch(timelineProvider.notifier).fetchNextPage();
       setState(() {});
     }
   }
@@ -51,19 +51,26 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
               style: const TextStyle(color: Colors.white),
             ),
           ),
-          data: (data) => RefreshIndicator(
-            onRefresh: _onRefresh,
-            displacement: 40,
-            child: PageView.builder(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              itemCount: _itemCount,
-              onPageChanged: _onPageChanged,
-              itemBuilder: (context, index) => VideoPost(
-                index: index,
+          data: (videos) {
+            _itemCount = videos.length;
+            return RefreshIndicator(
+              onRefresh: _onRefresh,
+              displacement: 40,
+              child: PageView.builder(
+                controller: _pageController,
+                scrollDirection: Axis.vertical,
+                onPageChanged: _onPageChanged,
+                itemCount: _itemCount,
+                itemBuilder: (context, index) {
+                  final videoData = videos[index];
+                  return VideoPost(
+                    index: index,
+                    videoData: videoData,
+                  );
+                },
               ),
-            ),
-          ),
+            );
+          },
         );
   }
 }
