@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>574678010329-2eehal4hrufp0rjkarqs6ubv3hhko03p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.574678010329-2eehal4hrufp0rjkarqs6ubv3hhko03p</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>574678010329-6o804l3jopiri45v52no0u85nt5uje74.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCnp7N6TgOOt7RTgcZON6TLcJB49PmCKUw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>574678010329</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.tiktokClone</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-practice-e2045</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-practice-e2045.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:574678010329:ios:b2c1dcefedfa8d097871c8</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-practice-e2045-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

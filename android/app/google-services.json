@@ -15,41 +15,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCv9C2loIadZBfhkllReF2bIWuCaZtWoBI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ujinbak.tiktokClone"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:574678010329:android:6fd6520bf077c65e7871c8",
-        "android_client_info": {
-          "package_name": "com.ujin.flutter_practice"
-        }
-      },
-      "oauth_client": [
+          "client_id": "574678010329-6o804l3jopiri45v52no0u85nt5uje74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tiktok_clone",
+            "certificate_hash": "08be6523ba19d9696fcd25a39a22d170f96339d6"
+          }
+        },
         {
           "client_id": "574678010329-i5s0sou817mhgg9rna2nc9hr37vsia8c.apps.googleusercontent.com",
           "client_type": 3

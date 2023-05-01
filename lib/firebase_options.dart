@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,13 +45,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDIXYXUV65ADN7FOVidUGaRprAxQAH-v1I',
-    appId: '1:574678010329:web:2110e3c3eb0c878c7871c8',
+    appId: '1:574678010329:web:55336eb870089e587871c8',
     messagingSenderId: '574678010329',
     projectId: 'flutter-practice-e2045',
     authDomain: 'flutter-practice-e2045.firebaseapp.com',
     databaseURL: 'https://flutter-practice-e2045-default-rtdb.firebaseio.com',
     storageBucket: 'flutter-practice-e2045.appspot.com',
-    measurementId: 'G-E58KKJCHMN',
+    measurementId: 'G-YH14RX9XPF',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -73,7 +70,20 @@ class DefaultFirebaseOptions {
     projectId: 'flutter-practice-e2045',
     databaseURL: 'https://flutter-practice-e2045-default-rtdb.firebaseio.com',
     storageBucket: 'flutter-practice-e2045.appspot.com',
+    androidClientId: '574678010329-6o804l3jopiri45v52no0u85nt5uje74.apps.googleusercontent.com',
     iosClientId: '574678010329-1fm1ofsmr22i5kle8ph6mt1p3bnp108k.apps.googleusercontent.com',
     iosBundleId: 'com.ujinbak.tiktokClone',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCnp7N6TgOOt7RTgcZON6TLcJB49PmCKUw',
+    appId: '1:574678010329:ios:b2c1dcefedfa8d097871c8',
+    messagingSenderId: '574678010329',
+    projectId: 'flutter-practice-e2045',
+    databaseURL: 'https://flutter-practice-e2045-default-rtdb.firebaseio.com',
+    storageBucket: 'flutter-practice-e2045.appspot.com',
+    androidClientId: '574678010329-6o804l3jopiri45v52no0u85nt5uje74.apps.googleusercontent.com',
+    iosClientId: '574678010329-2eehal4hrufp0rjkarqs6ubv3hhko03p.apps.googleusercontent.com',
+    iosBundleId: 'com.example.tiktokClone',
   );
 }
