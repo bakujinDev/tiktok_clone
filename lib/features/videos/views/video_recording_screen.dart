@@ -58,7 +58,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
       ResolutionPreset.ultraHigh,
       imageFormatGroup: ImageFormatGroup.yuv420,
     );
-
+    print("a");
     await _cameraController.initialize();
     await _cameraController.prepareForVideoRecording();
     _maxZoomLevel = await _cameraController.getMaxZoomLevel();
@@ -134,6 +134,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _setFlashMode(FlashMode newFlashMode) async {
+    print("b");
     await _cameraController.setFlashMode(newFlashMode);
 
     _flashMode = newFlashMode;
@@ -141,6 +142,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _startRecording(TapDownDetails _) async {
+    print("c");
     if (_cameraController.value.isRecordingVideo) return;
 
     await _cameraController.startVideoRecording();
@@ -150,6 +152,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _stopRecording() async {
+    print("d");
     if (!_cameraController.value.isRecordingVideo) return;
 
     _buttonAnimationController.reverse();
@@ -188,6 +191,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   void _onVerticalDrag(DragUpdateDetails details) {
+    print("e");
     int zoomDelay = 100;
     double zoomPercent = -details.delta.dy * _maxZoomLevel / (100 * zoomDelay);
 

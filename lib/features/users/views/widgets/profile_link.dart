@@ -44,7 +44,6 @@ class _ProfileLinkState extends ConsumerState<ProfileLink> {
   }
 
   void _submitLink() async {
-    final data = {"link": _link};
     await ref.read(usersProvider.notifier).updateProfile(link: _link);
     widget.setEditLinkMode(false);
   }
