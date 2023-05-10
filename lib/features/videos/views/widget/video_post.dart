@@ -6,6 +6,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/models/video_model.dart';
 import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
+import 'package:tiktok_clone/features/videos/view_models/video_post_view_models.dart';
 import 'package:tiktok_clone/features/videos/views/widget/video_button.dart';
 import 'package:tiktok_clone/features/videos/views/widget/video_comments.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
@@ -107,6 +108,10 @@ class VideoPostState extends ConsumerState<VideoPost>
     setState(() {
       _isPaused = !_isPaused;
     });
+  }
+
+  void _onLikeTap() {
+    ref.read(videoPostProvider(widget.videoData.id).notifier).toggleLikeVideo();
   }
 
   void _onTapShowCommentMore() {
@@ -269,10 +274,28 @@ class VideoPostState extends ConsumerState<VideoPost>
                           'https://firebasestorage.googleapis.com/v0/b/flutter-practice-e2045.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media&token=92490adc-48b0-4ad1-8ac1-7f7734959731&trash=${DateTime.now().toString()}'),
                       child: Text("@${widget.videoData.creator}"),
                     ),
-                    VideoButton(
-                      icon: FontAwesomeIcons.solidHeart,
-                      text: S.of(context).likeCount(widget.videoData.likes),
-                    ),
+                    ref.watch(videoPostProvider(widget.videoData.id)).when(
+                          data: (data) {
+                            return VideoButton(
+                              icon: FontAwesomeIcons.solidHeart,
+                              iconColor: data ? Colors.red : null,
+                              text: S
+                                  .of(context)
+                                  .likeCount(widget.videoData.likes),
+                              onTap: _onLikeTap,
+                            );
+                          },
+                          error: (error, stackTrace) => VideoButton(
+                            icon: FontAwesomeIcons.solidHeart,
+                            text:
+                                S.of(context).likeCount(widget.videoData.likes),
+                          ),
+                          loading: () => VideoButton(
+                            icon: FontAwesomeIcons.solidHeart,
+                            text:
+                                S.of(context).likeCount(widget.videoData.likes),
+                          ),
+                        ),
                     VideoButton(
                       icon: FontAwesomeIcons.solidComment,
                       text:
