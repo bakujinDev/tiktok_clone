@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/inbox/view_models/messages_view_model.dart';
 import 'package:tiktok_clone/utils.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+class ChatDetailScreen extends ConsumerStatefulWidget {
   static const String routeName = 'chatDetail';
   static const String routeUrl = ':chatId';
 
@@ -16,10 +18,10 @@ class ChatDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ConsumerState<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -41,12 +43,18 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   }
 
   void _sendMessage() {
+    final text = _textEditingController.text;
+
+    if (text == "") return;
+
+    ref.read(messagesProvider.notifier).sendMessage(text);
     _textEditingController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
+    final bool isLoading = ref.watch(messagesProvider).isLoading;
 
     return GestureDetector(
       onTap: _unFocusTextEditor,
@@ -190,7 +198,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     ),
                     Gaps.h10,
                     GestureDetector(
-                      onTap: _sendMessage,
+                      onTap: isLoading ? null : _sendMessage,
                       child: Container(
                         width: Sizes.size36,
                         height: Sizes.size36,
@@ -202,9 +210,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                   ? Colors.grey.shade700
                                   : Colors.grey.shade300,
                         ),
-                        child: const Center(
+                        child: Center(
                           child: FaIcon(
-                            FontAwesomeIcons.solidPaperPlane,
+                            isLoading
+                                ? FontAwesomeIcons.hourglass
+                                : FontAwesomeIcons.solidPaperPlane,
                             size: Sizes.size18,
                             color: Colors.white,
                           ),
