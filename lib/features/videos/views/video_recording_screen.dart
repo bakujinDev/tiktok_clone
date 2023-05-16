@@ -58,7 +58,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
       ResolutionPreset.ultraHigh,
       imageFormatGroup: ImageFormatGroup.yuv420,
     );
-    print("a");
+
     await _cameraController.initialize();
     await _cameraController.prepareForVideoRecording();
     _maxZoomLevel = await _cameraController.getMaxZoomLevel();
